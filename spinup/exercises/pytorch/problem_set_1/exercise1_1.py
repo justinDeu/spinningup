@@ -23,12 +23,13 @@ def gaussian_likelihood(x, mu, log_std):
     Returns:
         Tensor with shape [batch]
     """
-    #######################
-    #                     #
-    #   YOUR CODE HERE    #
-    #                     #
-    #######################
-    return torch.zeros(1)
+    # x - samples 
+    first_half_summation = ((x - mu) / torch.exp(log_std)) ** 2
+    second_half_summation = first_half_summation + (2 * log_std)
+    constant_add = second_half_summation + np.log(2 * np.pi) # where did the k go?
+    neg_factor = constant_add * -0.5
+
+    return neg_factor.sum(axis=1)
 
 
 if __name__ == '__main__':
