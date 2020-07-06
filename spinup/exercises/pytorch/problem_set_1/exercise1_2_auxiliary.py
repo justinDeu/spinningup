@@ -38,6 +38,7 @@ class ExerciseActorCritic(nn.Module):
                  hidden_sizes=(64,64), activation=nn.Tanh,
                  actor=None):
         super().__init__()
+        print(f'Action Space: {action_space.shape}')
         obs_dim = observation_space.shape[0]
         self.pi = actor(obs_dim, action_space.shape[0], hidden_sizes, activation)
         self.v  = MLPCritic(obs_dim, hidden_sizes, activation)
